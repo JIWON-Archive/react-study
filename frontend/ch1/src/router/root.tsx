@@ -1,9 +1,18 @@
+import { lazy, Suspense } from "react";
 import { createBrowserRouter } from "react-router";
+// 페이지를 필요할 때만 로딩하기 위해 lazy와 Suspense 사용
+const Loading = () => <div>Loading...</div>
+const Main = lazy(() => import("../pages/main-page"));
+const About = lazy(() => import("../pages/aboutPage"));
 
 const router = createBrowserRouter([
   {
     path: "",
-    element: <div>Hello World</div>,
+    element: <Suspense fallback={<Loading />}><Main /></Suspense>,
+  },
+  {
+    path: "about",
+    element: <Suspense fallback={<Loading />}><About /></Suspense>,
   }
 ]);
 
