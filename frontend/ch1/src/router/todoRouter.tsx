@@ -16,6 +16,10 @@ const todoRouter = () => {
                     path: 'list',
                     element:
                         <Suspense fallback={<Loading />}> <TodoList /> </Suspense>  
+             },
+             {
+                path:  'read/:tno',
+                element: <Suspense fallback={<Loading />}> <ReadPage /> </Suspense>
              }
             ]
         }
