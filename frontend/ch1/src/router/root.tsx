@@ -1,6 +1,7 @@
 import { lazy, Suspense } from 'react';
 import { createBrowserRouter } from 'react-router';
 import BasicLayout from '../layouts/basicLayout';
+import todoRouter from './todoRouter';
 
 // 로딩 중에 보여줄 임시 컴포넌트
 // eslint-disable-next-line react-refresh/only-export-components
@@ -39,6 +40,7 @@ const router = createBrowserRouter([
           </Suspense>
         ),
       },
+      todoRouter(),
     ],
   },
 ]);
