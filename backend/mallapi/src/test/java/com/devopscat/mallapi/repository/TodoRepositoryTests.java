@@ -105,9 +105,20 @@ public class TodoRepositoryTests {
 
         Page<Todo> result = todoRepository.findAll(pageable);
 
+        log.info(result.getTotalPages());
         log.info(result.getTotalElements());
 
-        result.getContent().stream().forEach(todo -> log.info(todo));
+//        result.getContent().stream().forEach(todo -> log.info(todo));
+
+    }
+
+    @Disabled
+    @Test
+    public void testSearch1() {
+        Pageable pageable = PageRequest.of(0, 10, Sort.by("tno").descending());
+        Page<Todo> result = todoRepository.findByTitleContaining("1", pageable);
+
+        result.stream().forEach(todo -> log.info(todo));
 
     }
 }
