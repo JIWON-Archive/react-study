@@ -1,6 +1,8 @@
 package com.devopscat.mallapi.repository;
 
+import com.devopscat.mallapi.domain.QTodo;
 import com.devopscat.mallapi.domain.Todo;
+import com.querydsl.jpa.JPQLQueryFactory;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -22,6 +24,9 @@ public class TodoRepositoryTests {
 
     @Autowired
     private TodoRepository todoRepository;
+
+    @Autowired
+    private JPQLQueryFactory queryFactory;
 
     @Test
     @Disabled
@@ -97,7 +102,7 @@ public class TodoRepositoryTests {
         todoRepository.deleteById(tno);
     }
 
-    @Disabled
+//    @Disabled
     @Test
     public void testPaging() {
 
@@ -121,4 +126,19 @@ public class TodoRepositoryTests {
         result.stream().forEach(todo -> log.info(todo));
 
     }
+
+    // QTodo를 이용해서 title로 '11'이라는 글자가 있는 데이터 검색
+    @Test
+    public void testSearch2() {
+        Pageable pageable = PageRequest.of(0,10, Sort.by("tno").descending());
+
+        // JPQLQueryFactory를 이용해서 검색
+        QTodo qTodo = QTodo.todo;
+
+        java.util.List<Todo> list = queryFactory.selectFrom(qTodo).where(qTodo.title.contains("11")).fetch();
+
+        log.info(list);
+
+    }
+
 }
