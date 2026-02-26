@@ -30,6 +30,7 @@ public class TodoServiceTests {
         log.info("TNO: " + tno);
     }
 
+    @Disabled
     @Test
     public void testRead() {
         // Long 타입으로 1을 저장
@@ -38,4 +39,19 @@ public class TodoServiceTests {
         TodoDTO todoDTO = todoService.get(tno);
         log.info(todoDTO);
     }
+
+    @Disabled
+    @Test
+    public void testModify() {
+        TodoDTO todoDTO = TodoDTO.builder()
+                .tno(1L)
+                .title("Test Update Title")
+                .complete(true)
+                .dueDate(LocalDate.of(2025,12,31))
+                .build();
+
+        todoService.modify(todoDTO);
+        log.info(todoDTO);
+    }
+
 }

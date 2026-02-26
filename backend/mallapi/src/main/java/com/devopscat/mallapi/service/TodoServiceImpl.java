@@ -21,8 +21,8 @@ public class TodoServiceImpl implements TodoService {
     private final ModelMapper modelMapper;
     private final TodoRepository todoRepository;
 
-    @Override
     // 등록
+    @Override
     public Long register(TodoDTO todoDTO) {
         log.info(".........");
         // DTO를 엔티티 객체로 바꿔준다.
@@ -31,12 +31,35 @@ public class TodoServiceImpl implements TodoService {
         return saveTodo.getTno();
     }
 
-    @Override
     // 조회
+    @Override
     public TodoDTO get(Long tno) {
         Optional<Todo> result = todoRepository.findById(tno);
         Todo todo = result.orElseThrow();
         TodoDTO dto = modelMapper.map(todo, TodoDTO.class);
         return dto;
+    }
+
+    // 수정
+    @Override
+    public void modify(TodoDTO todoDTO) {
+        // Todo 엔티티 조회
+        Optional<Todo> result = todoRepository.findById(todoDTO.getTno());
+        Todo todo = result.orElseThrow();
+
+        // title, complete, dueDate 변경
+        todo.changeTitle(todoDTO.getTitle());
+        todo.changeComplete(todoDTO.isComplete());
+        todo.changeDueDate(todoDTO.getDueDate());
+
+        // dirty checking
+    }
+
+    // 삭제
+    @Override
+    public void remove(Long tno) {
+        log.info("remove.......");
+
+        //todoRepository.deleteById(tno);
     }
 }
