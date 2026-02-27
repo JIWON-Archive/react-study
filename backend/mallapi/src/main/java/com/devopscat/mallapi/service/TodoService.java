@@ -1,6 +1,8 @@
 package com.devopscat.mallapi.service;
 
 import com.devopscat.mallapi.domain.Todo;
+import com.devopscat.mallapi.dto.PageRequestDTO;
+import com.devopscat.mallapi.dto.PageResponseDTO;
 import com.devopscat.mallapi.dto.TodoDTO;
 
 import java.util.Optional;
@@ -12,4 +14,6 @@ public interface TodoService {
     void modify(TodoDTO todoDTO);
 
     void remove(Long tno);
+
+    PageResponseDTO<TodoDTO> list(PageRequestDTO pageRequestDTO);
 }

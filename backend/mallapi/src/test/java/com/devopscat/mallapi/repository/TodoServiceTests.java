@@ -1,5 +1,7 @@
 package com.devopscat.mallapi.repository;
 
+import com.devopscat.mallapi.dto.PageRequestDTO;
+import com.devopscat.mallapi.dto.PageResponseDTO;
 import com.devopscat.mallapi.dto.TodoDTO;
 import com.devopscat.mallapi.service.TodoService;
 import lombok.extern.log4j.Log4j2;
@@ -52,6 +54,17 @@ public class TodoServiceTests {
 
         todoService.modify(todoDTO);
         log.info(todoDTO);
+    }
+
+    // list()에 대한 테스트 코드
+    @Test
+    public void testList() {
+        log.info("-----------");
+        PageRequestDTO pageResponseDTO = PageRequestDTO.builder().page(11).build();
+        PageResponseDTO<TodoDTO> dto = todoService.list(pageResponseDTO);
+
+        log.info(dto);
+        log.info(dto.getPageNumList());
     }
 
 }
