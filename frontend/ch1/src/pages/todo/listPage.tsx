@@ -1,4 +1,5 @@
 import { useSearchParams } from "react-router";
+import ListComponent from "../../components/todo/listComponent";
 
 function ListPage() {
     const [queryParams] = useSearchParams();
@@ -9,6 +10,7 @@ function ListPage() {
     return ( 
         <div className="bg-white w-full">
             <div>Tode List Page {page} {size}</div>
+            <ListComponent/>
         </div>
     );
 }
